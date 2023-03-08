@@ -1,0 +1,29 @@
+def merge_sort(list)
+  if list.length < 2
+    sorted_list = list
+  else
+    mid = list.length / 2
+    sorted_left_half = merge_sort(list[0...mid])
+    sorted_right_half = merge_sort(list[mid...list.length])
+
+    sorted_list = []
+
+    until sorted_left_half.empty? || sorted_right_half.empty?
+      sorted_list << if sorted_right_half[0] > sorted_left_half[0]
+                       sorted_left_half.shift
+                     else
+                       sorted_right_half.shift
+                     end
+    end
+
+    sorted_list += sorted_left_half + sorted_right_half
+
+  end
+
+  sorted_list
+end
+
+unsorted_list = []
+20.times { unsorted_list << rand(20) }
+
+puts merge_sort(unsorted_list).join(' ')
